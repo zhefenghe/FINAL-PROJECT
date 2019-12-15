@@ -1,32 +1,38 @@
 ---
-title: "R Notebook"
+title: "Final project of STAT184-Zhefeng He"
 output: html_notebook
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+#I.Data Access
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
-
+###Following are packages we gonna use in the project.
+###Loading data collected from:
+###http://www.ungei.org/resources/files/unesco_mexico124210eo.pdf This demonstrates the school attendence of Mexico
+###http://www.electionresources.org/mx/deputies.php?election=2000&state=32
+###election map of Mexico
+###Loading x1:97 election map, x2:2000 election map, x3: school attandenceof 1990s
 ```{r}
 library(readxl)
 library(ggplot2)
-library(stargazer)
 library(httr)
 library(dplyr)
 library(gridExtra)
 library(tidyverse)
+library(repmis)
 
-x1<-read_xlsx("C:/Users/zhefe/Desktop/497/97poll.xlsx")
-x2<-read_xlsx("C:/Users/zhefe/Desktop/497/20poll.xlsx")
-x3<-read_xlsx("C:/Users/zhefe/Desktop/497/per.xlsx")
+library(httr)
 
+x3 <- read_excel("per.xlsx")
+View(x3)
+
+x2<-read_excel("20poll.xlsx")
+View(x2)
+
+x1<-read_excel("97poll.xlsx")
+
+View(x1)
 ```
-
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
-
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
-
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+###Here WE inpsect the infomration of datasets and check variables.
 ```{r}
 summary(x1)
 summary(x2)
@@ -34,10 +40,10 @@ summary(x3)
 str(x1)
 str(x2)
 str(x3)
-x3
-x1
-x2
+
 ```
+###As there are special characters in election 20, so using regular expression to clear it.
+###Also, in x1, the percentage number is expressed in"0.XXX", mutiple it by 100.
 ```{r}
 x2 <-
   x2 %>%
@@ -51,7 +57,7 @@ x1 <-
 x1
 ```
 # Data sets combination
-
+###Here we join two tables for further analysis.
 ```{r}
 me <-
   x1 %>%
@@ -66,40 +72,49 @@ me2 <-
   mutate(change=(er20-er97))
 me2
 ```
+
+###Gather the me2 dataset to collect election result under same variable "name".
+###Generate the graphs to show the distribution of elections data.
+###As you can see a general increase on election 2000 compared to election 1997.
 ```{r} 
 me1<-  
   me2 %>%
   group_by(name) %>%
   gather( key=election, value=votes, er97, er20 )
-me2 %>%
-  ggplot(aes(x = change, color=name)) +
-  geom_histogram() 
-```
-
-```{r}
-mean(me2$perceatend)
-sd(me2$perceatend)
-```
-
-```{r}
+me1 %>%
+  ggplot(aes(x=name, y=votes, color=election)) +
+  geom_point()
 me1 %>%
   ggplot(aes(x = name, y = votes)) +
   geom_point()+
   facet_wrap(~election)
 
-me2 %>%
+```
+### Here we measure central tendency and standard deviation of Independent variable with mean and sd.
+### so the mean of school attendance is 6.264516% and deivation of positive & negative 2.608646 %.
+```{r}
+mean(me2$perceatend)
+sd(me2$perceatend)
+```
+### Back to the me2 dataset.
+### Rearrange the me2 in the rank of most votes changing state for further research
+### checking the distribution of independent variables by states through the histogram graph.
+
+```{r}
+me2 <-
+  me2 %>%
   filter(change >= 0) %>%
   group_by(name) %>%
   arrange(desc(change))
-me1
-me1 %>%
-  ggplot(aes(x=name, y=votes, color=election)) +
-  geom_point()
+me2 %>%
+  ggplot(aes(x = change, color=name)) +
+  geom_histogram() 
+
 
 ```
-
-
-
+###Using the me2 to generate the distribution of dependent variables by independent variables
+### add density to see the changing trend.
+###the density tells us a rough negative relationship.
 ```{r}
 p1<-ggplot(me2,aes(x=perceatend,y=er20))+
   geom_point(size=2, color='red', alpha=0.9)+  #Better setting size and color
@@ -114,12 +129,13 @@ Federal Elections in Mexico
        ")
 p1
 ```
-
+###building a liner model to analyze the relationship
+### Low R-square means the relationship is not significant.
 ```{r}
 fg1<-lm(change~perceatend,data = me2)
 summary(fg1)
 ```
-
+###graph build based on the model support the result of low R-square.
 ```{r}
 pg2<-ggplot(me2,aes(x=perceatend,y=change))+
   xlim(min(me2$perceatend),max(me2$perceatend))+
@@ -137,9 +153,10 @@ pg2<-ggplot(me2,aes(x=perceatend,y=change))+
          Federal Elections in Mexico")
 pg2
 ```
-
-
-
+###Why is not statitical signifcant?
+###probably because the wide data distribution.
+###the machine-learning graph verified the wide data distribution.
+###This is we why cannt conclude a statical significant result.
 ```{r}
 Mex <- dist(me2)
 hc <- hclust(Mex)
