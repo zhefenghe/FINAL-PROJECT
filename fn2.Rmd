@@ -135,7 +135,7 @@ p1
 fg1<-lm(change~perceatend,data = me2)
 summary(fg1)
 ```
-###graph build based on the model support the result of low R-square.
+###graph build based on the model support the result of low R-square, and no significant relationship between variables. The assumption is false.
 ```{r}
 pg2<-ggplot(me2,aes(x=perceatend,y=change))+
   xlim(min(me2$perceatend),max(me2$perceatend))+
@@ -163,3 +163,7 @@ hc <- hclust(Mex)
 plot(hc, hang=-1)
 
 ```
+
+
+
+###In the end, This research was motivated by the central question: what social factors contributed the vote increasing for PAN in Mexico 2000 election. This study concludes that there is no statistically significant relationship between school attendance rate and votes changing of PAN. As complexity and variety of social components, future studies should consider other factors of education to evaluate the influence of education on political actions, or including any other factors to test if they have influence on political actions, and they certainly have, how much is the effect.  
