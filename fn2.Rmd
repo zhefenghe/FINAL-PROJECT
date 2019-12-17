@@ -155,7 +155,7 @@ pg2
 ```
 ###Why is not statitical signifcant?
 ###probably because the wide data distribution.
-###the machine-learning graph verified the wide data distribution.
+###the machine-learning graph verified the wide data cluster.
 ###This is we why cannt conclude a statical significant result.
 ```{r}
 Mex <- dist(me2)
