@@ -1,4 +1,7 @@
 # FINAL-PROJECT
+
+THE NAME OF FINAL DATA RMD is "fn2'!!!!!!!!!!!!!!!!!!!!!!
+
 Rmd, dataset, and introduction about final project of STAT184
 This protject is aim to test if there is a positive relationship between the School attendence rate and the support rate of PAN.
 
