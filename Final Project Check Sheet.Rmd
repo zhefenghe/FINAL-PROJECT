@@ -15,7 +15,7 @@ be loaded from an R package–though supporting data may. (3) Access to all data
 the analysis. (4) Imported data is inspected at beginning of analysis using one or more R functions: e.g.,
 str, glimpse, head, tail, names, nrow, etc
 
-#(A) .Rmd Line numbers where at least two different data sources are imported: 10 to 34, listing the data source website, packages needed, most importantly, the imported data.
+#(A) .Rmd Line numbers where at least two different data sources are imported: 10 to 34, listing the data source website, packages needed, most importantly, the imported data.Data Source links start at line 10, first is a election map so I have to collect them into excels.The secondary dataset is from a PDF file, so again I have to collect them into excels.
 
 #(B) .Rmd Line numbers for inspecting data intake:37~42, summary and str used to inspect data.
 
