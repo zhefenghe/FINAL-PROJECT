@@ -49,6 +49,7 @@ as points, density, lines, segments, boxplots, bar charts, histograms, etc (+) u
 necessarily all in the same graph–such as color, size, shape, x/y position, facets, etc (+) layered graphics
 such as points and accompanying smoother, points and accompanying boxplots, overlaid density distributions,
 etc (+) leaflet maps (+) decision tree and/or dendogram displaying machine learning model results
+
 #(A) .Rmd Line number(s) for use of mulitple different geoms:143, 120, 121, 111, 86,89.
 
 #(B) .Rmd Line number(s) for use of multiple aesthetics:85,88,110,119,140.
