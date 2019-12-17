@@ -25,6 +25,7 @@ data verbs for general data wrangling like filter, mutate, summarise, arrange, g
 multiple data tables. (+) spread & gather to stack/unstack variables (+) regular expressions (+) reduction
 and/or transformation functions like mean, sum, max, min, n(), rank, pmin, etc. (+) user-defined functions
 (+) loops and control flow (+) machine learning
+
 #(A) .Rmd Line number(s) for general data wrangling:There are many, like 51, 72,  82, 106,107,and 108.
 
 #(B) .Rmd Line number(s) for a join operation: 61~66 inner_join.
@@ -53,6 +54,7 @@ etc (+) leaflet maps (+) decision tree and/or dendogram displaying machine learn
 #(B) .Rmd Line number(s) for use of multiple aesthetics:85,88,110,119,140.
 (C) .Rmd Line number(s) for use of layered graphics:
 (D) .Rmd Line number(s) for use of leaflet maps:
+
 #(E) .Rmd Line number(s) for use of decision tree or dendogram results:161~163.
 
 
